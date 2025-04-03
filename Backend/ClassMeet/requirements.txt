@@ -1,0 +1,7 @@
+flask
+pymongo
+google-auth-oauthlib
+pyjwt
+websockets
+pandas
+datetime
