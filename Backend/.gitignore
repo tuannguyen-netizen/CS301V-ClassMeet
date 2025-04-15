@@ -1,0 +1,59 @@
+# Python-specific
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# Virtual environments
+venv/
+.env/
+env/
+virtualenv/
+.venv/
+
+# Dependency directories
+site-packages/
+dist/
+build/
+*.egg-info/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Testing and coverage
+.coverage
+coverage.xml
+*.cover
+.pytest_cache/
+htmlcov/
+tox/
+nox/
+*.log
+
+# Package manager
+pip-wheel-metadata/
+Pipfile.lock
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Environment variables
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Miscellaneous
+*.swp
+*~
