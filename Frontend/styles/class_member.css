@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #6c757d;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+#member-classes {
+    padding: 2rem;
+    background: white;
+    margin: 2rem auto;
+    max-width: 600px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
