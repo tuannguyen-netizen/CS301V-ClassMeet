@@ -1,8 +1,59 @@
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+        --radius: 0.5rem;
+    }
+    .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+    }
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    color: var(--foreground);
+    background-image: url("./background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 header {
@@ -17,10 +68,13 @@ header {
 header .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+    background-image: url("./logo.png");
 }
 
 header .logout {
-    background-color: #6c63ff;
+    background-color: #dc3545;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -29,7 +83,7 @@ header .logout {
 }
 
 header .logout:hover {
-    background-color: #5a54d6;
+    background-color: #c82333;
 }
 
 main {
@@ -39,12 +93,72 @@ main {
 .profile {
     display: flex;
     gap: 2rem;
+    justify-content: center;
 }
 
 .profile-box, .class-box {
     background: white;
-    padding: 1rem;
-    border-radius: 5px;
+    padding: 1.5rem;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1;
+    width: 300px;
+}
+
+.profile-box h2, .class-box h2 {
+    margin-bottom: 1rem;
+    color: #007bff;
+}
+
+.class-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+.class-box ul li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.class-box ul li:last-child {
+    border-bottom: none;
+}
+
+.action-button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+.action-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+.action-button:disabled:hover {
+    background-color: #6c757d;
+}
+.action-button:disabled:active {
+    background-color: #6c757d;
+}
+.action-button:disabled:focus {
+    outline: none;
+    box-shadow: none;
+}
+.action-button:disabled:focus-visible {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+.action-button:disabled:focus-visible:hover {
+    background-color: #6c757d;
 }

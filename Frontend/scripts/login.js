@@ -1,8 +1,8 @@
-document.getElementById("login-form").addEventListener("submit", async function (e) {
+document.querySelector("form").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById("login-email").value;
-    const password = document.getElementById("login-password").value;
+    const email = document.querySelector(".field input[type='text']").value;
+    const password = document.querySelector(".field input[type='password']").value;
 
     try {
         const response = await fetch("/auth/login", {
@@ -15,10 +15,12 @@ document.getElementById("login-form").addEventListener("submit", async function 
 
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem("token", data.token); // Lưu token vào localStorage
-            window.location.href = "home.html"; // Chuyển hướng đến trang Home
+            localStorage.setItem("token", data.token);
+            alert("Login successful!");
+            window.location.href = "home.html";
         } else {
-            alert("Login failed. Please check your credentials.");
+            const errorData = await response.json();
+            alert(`Login failed: ${errorData.detail}`);
         }
     } catch (error) {
         console.error("Error during login:", error);
