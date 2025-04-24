@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Call App</title>
+  <link rel="stylesheet" href="../styles/meeting.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Main Section -->
+    <div class="main-section">
+      <div class="meeting-code">
+        <label>Code of Meeting:</label>
+        <input type="text" id="meeting-code" readonly value="ABC-123-XYZ">
+      </div>
+      <div class="screen">
+        <video id="local-video" autoplay muted></video>
+        <video id="remote-video" autoplay></video>
+      </div>
+      <div class="controls">
+        <a id="end-btn-button" class="control-btn end" href="home.html">End</a>
+        <button id="mute-btn-button" class="control-btn">Micro</button>
+        <button id="video-btn-button" class="control-btn">Cam</button>
+        <button id="volume-btn-button" class="control-btn">Vol</button>  
+      </div>
+    </div>
+    <!-- Chat Section -->
+    <div class="chat-section">
+      <div class="chat-header">Chat Box</div>
+      <div id="chat-box" class="chat-box"></div>
+      <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Chat...">
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <script src="../scripts/meeting.js"></script>
+</body>
+</html>
