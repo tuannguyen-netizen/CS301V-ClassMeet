@@ -1,35 +1,45 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        alert("You are not logged in. Redirecting to login page...");
-        window.location.href = "login.html";
-        return;
-    }
-
-    try {
-        const response = await fetch("/class/my-classes", {
-            headers: {
-                "Authorization": `Bearer ${token}`,
-            },
-        });
-
-        if (response.ok) {
-            const classes = await response.json();
-            const classList = document.getElementById("leader-classes");
-            classes.forEach(classItem => {
-                const div = document.createElement("div");
-                div.className = "class-item";
-                div.innerHTML = `
-                    <h3>${classItem.class_name}</h3>
-                    <p>${classItem.description}</p>
-                `;
-                classList.appendChild(div);
-            });
-        } else {
-            alert("Failed to load classes.");
-        }
-    } catch (error) {
-        console.error("Error fetching classes:", error);
-        alert("An error occurred. Please try again.");
-    }
+document.getElementById('back-btn').addEventListener('click', () => {
+    alert('Back button clicked!');
+    // Add navigation logic here
 });
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    alert('Logging out...');
+    // Add logout logic here
+});
+
+document.getElementById('start-meeting-btn').addEventListener('click', () => {
+    alert('Starting meeting...');
+    // Add meeting start logic here
+});
+
+document.getElementById('add-member-btn').addEventListener('click', () => {
+    alert('Add member clicked!');
+    // Add logic to add a member here
+});
+
+document.getElementById('delete-member-btn').addEventListener('click', () => {
+    alert('Delete member clicked!');
+    // Add logic to delete a member here
+});
+
+document.getElementById('view-members-btn').addEventListener('click', () => {
+    alert('View members clicked!');
+    // Add logic to view members here
+});
+
+document.getElementById('edit-member-btn').addEventListener('click', () => {
+    alert('Edit member clicked!');
+    // Add logic to edit a member here
+});
+
+document.getElementById('view-meetings-btn').addEventListener('click', () => {
+    alert('View meetings clicked!');
+    // Add logic to view meetings here
+});
+
+document.getElementById('view-notifications-btn').addEventListener('click', () => {
+    alert('View notifications clicked!');
+    // Add logic to view notifications here
+});
+

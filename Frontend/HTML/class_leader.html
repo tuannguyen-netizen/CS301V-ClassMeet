@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Classes (Leader)</title>
+    <title>Class Leader</title>
     <link rel="stylesheet" href="../styles/class_leader.css">
+    <script src="../scripts/class_leader.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>My Classes (Leader)</h1>
+        <a id="back-btn" class="back" href="home.html">←</a>
+        <img id="logo" src="icon.png">
+        <h1>Well come to ClassMeet</h1>
+        <a id="logout-btn" class="logout" href="login.html">Log out</a>
     </header>
     <main>
-        <div id="leader-classes">
-            <!-- Classes created by the leader will be displayed here -->
+        <div id="start-meeting">
+            <a id="start-meeting-btn" class="action-button" href="meeting.html">Start Meeting</a>
+        </div>
+        <div id="member-section">
+            <h2>List member</h2>
+            <div id="member-actions">
+                <input id="add-member-btn" type="button" value="Add member">
+                <input id="edit-member-btn" type="button" value="Edit member">
+            </div>
         </div>
     </main>
 </body>

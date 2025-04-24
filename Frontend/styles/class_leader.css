@@ -1,15 +1,159 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
 }
 
 header {
-    background-color: #343a40;
-    color: white;
-    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#back-btn {
+    background-color: lightgray;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+#logo {
+    background-color: lightgray;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    background-image: url('icon.png');
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+h1 {
+    flex: 1;
     text-align: center;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+#logout-btn {
+    background-color: #6c8efb;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#start-meeting {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 20px;
+    min-width: 300px;
+    max-width: 400px;
+    height: 500px;
+}
+
+#start-meeting-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#member-section {
+    flex: 1;
+    background-color: #d3d3d3;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 20px;
+    min-width: 300px;
+    max-width: 400px;
+    height: 500px;
+    width: 300px;
+}
+
+#member-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: bottom;
+    align-items: bottom;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    width: 100%;
+    min-width: 300px;
+    max-width: 400px;
+    height: 100px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    align-items: bottom;
+    display: flex;
+    justify-content: bottom;
+    gap: 5px;
+    color: black;
+}
+
+#member-actions button {
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+    align-items: bottom;
+    display: flex;
+    justify-content: bottom;
+    gap: 5px;
+    color: black;
 }
 
 #leader-classes {

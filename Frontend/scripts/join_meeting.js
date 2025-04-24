@@ -26,3 +26,18 @@ document.getElementById("join-meeting-form").addEventListener("submit", async fu
         alert("An error occurred. Please try again.");
     }
 });
+
+document.getElementById("meeting-code").addEventListener("input", function () {
+    const meetingCode = document.getElementById("meeting-code").value;
+    const joinButton = document.getElementById("join-button");
+    joinButton.disabled = meetingCode.length === 0;
+});
+
+document.getElementById("meeting-code").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        document.getElementById("join-meeting-form").dispatchEvent(new Event("submit"));
+    }
+});
+
+document.getElementById("meeting-code").focus();
