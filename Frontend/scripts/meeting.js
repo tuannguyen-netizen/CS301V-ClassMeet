@@ -1,123 +1,69 @@
-const socket = io();
-const peer = new Peer();
+document.addEventListener('DOMContentLoaded', () => {
+    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
+    const messages = document.getElementById('messages');
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const muteButton = document.getElementById('mute-btn');
+    const videoButton = document.getElementById('video-btn');
+    const volumeButton = document.getElementById('volume-btn');
+    const endCallButton = document.getElementById('end-call-btn');
 
-const localVideo = document.getElementById('local-video');
-const remoteVideo = document.getElementById('remote-video');
-const muteBtn = document.getElementById('mute-btn-button');
-const videoBtn = document.getElementById('video-btn-button');
-const volumeBtn = document.getElementById('volume-btn-button');
-const endBtn = document.getElementById('end-btn-button');
-const chatInput = document.getElementById('chat-input');
-const sendBtn = document.getElementById('send-btn');
-const chatBox = document.getElementById('chat-box');
+    // Initialize video call
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+            localVideo.srcObject = stream;
+            // Simulate remote video for demo purposes
+            remoteVideo.srcObject = stream;
+        })
+        .catch(error => console.error('Error accessing media devices:', error));
 
-let localStream;
-let isMuted = false;
-let isVideoOn = true;
-let volumeOn = true;
-
-// Initialize WebRTC
-async function init() {
-  try {
-    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    localVideo.srcObject = localStream;
-
-    peer.on('open', (id) => {
-      socket.emit('join-room', 'video-call-room', id);
+    // Chatbox functionality
+    sendButton.addEventListener('click', () => {
+        const message = messageInput.value.trim();
+        if (message) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messages.appendChild(messageElement);
+            messageInput.value = '';
+            messages.scrollTop = messages.scrollHeight;
+        }
     });
 
-    peer.on('call', (call) => {
-      call.answer(localStream);
-      call.on('stream', (remoteStream) => {
-        remoteVideo.srcObject = remoteStream;
-      });
+    // Mute/unmute microphone
+    muteButton.addEventListener('click', () => {
+        const stream = localVideo.srcObject;
+        if (stream) {
+            const audioTracks = stream.getAudioTracks();
+            audioTracks.forEach(track => track.enabled = !track.enabled);
+            console.log(`Microphone ${audioTracks[0].enabled ? 'unmuted' : 'muted'}`);
+        }
     });
 
-    socket.on('user-connected', (userId) => {
-      const call = peer.call(userId, localStream);
-      call.on('stream', (remoteStream) => {
-        remoteVideo.srcObject = remoteStream;
-      });
+    // Toggle camera on/off
+    videoButton.addEventListener('click', () => {
+        const stream = localVideo.srcObject;
+        if (stream) {
+            const videoTracks = stream.getVideoTracks();
+            videoTracks.forEach(track => track.enabled = !track.enabled);
+            console.log(`Camera ${videoTracks[0].enabled ? 'enabled' : 'disabled'}`);
+        }
     });
-  } catch (err) {
-    console.error('Error accessing media devices:', err);
-  }
-}
 
-// Chat functionality
-function addMessage(content, isSent) {
-  const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message', isSent ? 'sent' : 'received');
-  messageDiv.textContent = content;
-  chatBox.appendChild(messageDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
+    // Toggle volume on/off
+    volumeButton.addEventListener('click', () => {
+        const stream = remoteVideo.srcObject;
+        if (stream) {
+            const audioTracks = stream.getAudioTracks();
+            audioTracks.forEach(track => track.enabled = !track.enabled);
+            console.log(`Volume ${audioTracks[0].enabled ? 'enabled' : 'muted'}`);
+        }
+    });
 
-sendBtn.addEventListener('click', () => {
-  const message = chatInput.value.trim();
-  if (message) {
-    socket.emit('chat-message', message);
-    addMessage(message, true);
-    chatInput.value = '';
-  }
+    // Confirm before ending the call
+    endCallButton.addEventListener('click', (event) => {
+        if (!confirm('Are you sure you want to end the call?')) {
+            event.preventDefault();
+        }
+    });
 });
-
-chatInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    sendBtn.click();
-  }
-  if (e.key === 'Escape') {
-    chatInput.value = '';
-  }
-  if (e.key === 'ArrowUp') {
-    chatInput.value = chatInput.value.slice(0, -1); // Remove last character
-  }
-});
-
-socket.on('chat-message', (message) => {
-  addMessage(message, false);
-});
-
-socket.on('user-disconnected', (userId) => {
-  console.log(`User ${userId} disconnected`);
-  // Handle user disconnection (e.g., show a message or update UI)
-});
-
-// Media controls
-muteBtn.addEventListener('click', () => {
-  isMuted = !isMuted;
-  localStream.getAudioTracks()[0].enabled = !isMuted;
-  muteBtn.style.backgroundColor = isMuted ? '#ccc' : '#fff';
-});
-
-videoBtn.addEventListener('click', () => {
-  isVideoOn = !isVideoOn;
-  localStream.getVideoTracks()[0].enabled = isVideoOn;
-  videoBtn.style.backgroundColor = isVideoOn ? '#fff' : '#ccc';
-});
-
-volumeBtn.addEventListener('click', () => {
-  volumeOn = !volumeOn;
-  remoteVideo.muted = !volumeOn;
-  volumeBtn.style.backgroundColor = volumeOn ? '#fff' : '#ccc';
-});
-
-endBtn.addEventListener('click', () => {
-  localStream.getTracks().forEach(track => track.stop());
-  localVideo.srcObject = null;
-  remoteVideo.srcObject = null;
-  socket.disconnect();
-});
-
-// Handle window close event
-window.addEventListener('beforeunload', () => {
-  localStream.getTracks().forEach(track => track.stop());
-  socket.disconnect();
-});
-
-// Handle chat input focus and blur events
-chatInput.addEventListener('focus', () => {
-  chatInput.style.backgroundColor = '#fff';
-});
-// Start the app
-init();

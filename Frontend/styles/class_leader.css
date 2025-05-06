@@ -172,3 +172,45 @@ main {
     border-radius: 4px;
     background-color: #f9f9f9;
 }
+
+#member-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#member-list li {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#member-list li .member-name {
+    font-weight: bold;
+}
+
+#member-list li .member-actions {
+    display: flex;
+    gap: 10px;
+}
+
+#member-list li .member-actions button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#member-list li .member-actions button.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#member-list li .member-actions button.delete {
+    background-color: #f44336;
+    color: white;
+}

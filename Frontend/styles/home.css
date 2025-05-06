@@ -87,13 +87,36 @@ header .logout:hover {
 }
 
 main {
-    padding: 2rem;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--background);
+    background-image: url("./background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--foreground);
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    line-height: 3.5;
+    font-weight: bold;
+    text-align: center;
 }
 
 .profile {
     display: flex;
     gap: 2rem;
-    justify-content: center;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+    width: 10%;
+    max-width: 1200px;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    padding: 2rem;
 }
 
 .profile-box, .class-box {
@@ -102,6 +125,13 @@ main {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 300px;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
 }
 
 .profile-box h2, .class-box h2 {
@@ -109,14 +139,55 @@ main {
     color: #007bff;
 }
 
+.class-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.class-item:last-child {
+    border-bottom: none;
+}
+.class-item .class-name {
+    font-weight: bold;
+}
+.class-item .class-code {
+    font-style: italic;
+    color: #6c757d;
+}
+.class-item .class-code:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .class-box ul {
     list-style: none;
     padding: 0;
     margin: 0 0 1rem 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    align-items: center;
+    justify-content: center;
 }
 
 .class-box ul li {
     padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
     border-bottom: 1px solid #ddd;
 }
 

@@ -43,3 +43,63 @@ document.getElementById('view-notifications-btn').addEventListener('click', () =
     // Add logic to view notifications here
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const memberList = document.getElementById('member-list');
+    const addMemberBtn = document.getElementById('add-member-btn');
+    const editMemberBtn = document.getElementById('edit-member-btn');
+
+    // Fetch members from the backend API
+    async function fetchMembers() {
+        try {
+            const response = await fetch('http://backend3.example.com/api/members');
+            const members = await response.json();
+            populateMemberList(members);
+        } catch (error) {
+            console.error('Error fetching members:', error);
+        }
+    }
+
+    // Populate the member list dynamically
+    function populateMemberList(members) {
+        memberList.innerHTML = '';
+        members.forEach(member => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <span class="member-name">${member.name}</span>
+                <div class="member-actions">
+                    <button class="edit" onclick="editMember(${member.id})">Edit</button>
+                    <button class="delete" onclick="deleteMember(${member.id})">Delete</button>
+                </div>
+            `;
+            memberList.appendChild(listItem);
+        });
+    }
+
+    // Add member functionality
+    addMemberBtn.addEventListener('click', () => {
+        // Logic to add a new member
+        console.log('Add member button clicked');
+    });
+
+    // Edit member functionality
+    editMemberBtn.addEventListener('click', () => {
+        // Logic to edit a member
+        console.log('Edit member button clicked');
+    });
+
+    // Edit member handler
+    window.editMember = function (id) {
+        // Logic to edit a specific member
+        console.log('Edit member with ID:', id);
+    };
+
+    // Delete member handler
+    window.deleteMember = function (id) {
+        // Logic to delete a specific member
+        console.log('Delete member with ID:', id);
+    };
+
+    // Initial fetch of members
+    fetchMembers();
+});
+
