@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from '../scripts/home';
-import Login from '../scripts/login';
-import Register from '../scripts/register';
-import CreateClass from '../scripts/create_class';
-import ClassLeader from '../scripts/class_leader';
-import JoinMeeting from '../scripts/join_meeting';
-import Meeting from '../scripts/meeting';
-import ClassMember from './scripts/class-member';
-import CreateJoinClass from '../scripts/create_join_class';
+import Home from '../src/home';
+import Login from '../src/index';
+import Register from '../src/register';
+import CreateClass from '../src/create_class';
+import ClassLeader from '../src/class_leader';
+import JoinMeeting from '../src/join_meeting';
+import Meeting from '../src/meeting';
+import ClassMember from './src/class-member';
+import CreateJoinClass from '../src/create_join_class';
 
 const App = () => {
     return (
@@ -27,4 +27,4 @@ const App = () => {
         </Router>
     );
 };
-export default App.listen(5000);
+export default App;
