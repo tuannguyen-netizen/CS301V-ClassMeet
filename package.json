@@ -1,31 +1,38 @@
 {
+  "name": "webrtc-video-chat",
+  "version": "1.0.0",
+  "description": "A web application for video calling and chatting using WebRTC and Socket.io.",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "open": "start http://localhost:5000"
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "test": "jest"
+  },
+  "keywords": [
+    "webrtc",
+    "video",
+    "chat",
+    "socket.io",
+    "react"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io-client": "^4.0.0",
+    "webrtc-adapter": "^8.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
-  },
-  "dependencies": {
-    "axios": "^1.9.0",
-    "react-router-dom": "^7.6.0",
-    "react-scripts": "^5.0.1",
-    "socket.io": "^4.8.1",
-    "socket.io-client": "^4.8.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "babel-jest": "^26.6.0",
+    "babel-loader": "^8.4.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^26.6.0",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.15.2"
   }
 }

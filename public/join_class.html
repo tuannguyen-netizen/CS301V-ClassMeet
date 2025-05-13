@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Class</title>
+    <link rel="stylesheet" href="../style/join_class.css">
+    <script src ="../src/join_class.js" type="module" defer></script>
+</head>
+<body>
+    <header>
+        <a id="back-btn" href="home.html">←</a>
+        <div id="logo"></div>
+        <h1>Welcome to ClassMeet</h1>
+        <a id="logout-btn" href="index.html">Log out</a>
+    </header>
+    <div class="container">
+        <h1>Join Class</h1>
+        <form id="joinClassForm">
+            <label for="classCode">Class Code:</label>
+            <input type="text" id="classCode" name="classCode" required>
+            <a id="joinClassButton" type="submit" href="class_member.html">Join Class</a>
+        </form>
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+</body>
+</html>
