@@ -38,6 +38,25 @@ class ClassResponse(BaseModel):
     created_by: str
     is_creator: bool
 
+class ClassMemberResponse(BaseModel):
+    user_id: str
+    username: str
+    email: str
+    role: str
+
+class MeetingCreateRequest(BaseModel):
+    title: str = Field(..., min_length=1, max_length=100)
+    description: Optional[str] = Field(None, max_length=500)
+
+class MeetingResponse(BaseModel):
+    meeting_id: str
+    class_id: str
+    title: str
+    description: Optional[str]
+    created_by: str
+    start_time: datetime
+    end_time: Optional[datetime]
+    status: str
 
 class User:
     def __init__(self, username, email, password=None, user_id=None, created_at=None, updated_at=None):
@@ -253,57 +272,3 @@ class MeetingParticipant:
             left_at=data.get("left_at"),
             status=data.get("status", "joined")
         )
-
-
-class ChatMessage:
-    def __init__(self, meeting_id, user_id, content, message_id=None, sent_at=None):
-        self.message_id = message_id if message_id else str(ObjectId())
-        self.meeting_id = meeting_id
-        self.user_id = user_id
-        self.content = content
-        self.sent_at = sent_at if sent_at else datetime.utcnow()
-
-    def to_dict(self):
-        message_dict = {
-            "meeting_id": self.meeting_id,
-            "user_id": self.user_id,
-            "content": self.content,
-            "sent_at": self.sent_at
-        }
-        if self.message_id:
-            message_dict["_id"] = ObjectId(self.message_id)
-        return message_dict
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(
-            meeting_id=data.get("meeting_id"),
-            user_id=data.get("user_id"),
-            content=data.get("content"),
-            message_id=data.get("message_id") or str(data.get("_id", "")),
-            sent_at=data.get("sent_at")
-        )
-# Pydantic models for Meeting API
-class MeetingCreateRequest(BaseModel):
-    title: str = Field(..., min_length=1, max_length=100)
-    description: Optional[str] = Field(None, max_length=500)
-
-class MeetingResponse(BaseModel):
-    meeting_id: str
-    class_id: str
-    title: str
-    description: Optional[str]
-    created_by: str
-    start_time: datetime
-    end_time: Optional[datetime]
-    status: str
-
-class ChatMessageRequest(BaseModel):
-    content: str = Field(..., min_length=1, max_length=1000)
-
-class ChatMessageResponse(BaseModel):
-    message_id: str
-    user_id: str
-    username: str
-    content: str
-    sent_at: datetime

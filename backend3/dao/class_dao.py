@@ -117,3 +117,12 @@ class ClassDAO:
             "role": ClassMembership.ROLE_CREATOR
         })
         return membership is not None
+
+    async def get_class_members(self, class_id):
+        cursor = self.membership_collection.find({"class_id": class_id})
+        members = []
+        async for doc in cursor:
+            doc["membership_id"] = str(doc.pop("_id"))
+            members.append(doc)
+        return members
+

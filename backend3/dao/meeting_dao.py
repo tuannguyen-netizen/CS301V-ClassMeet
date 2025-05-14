@@ -2,11 +2,9 @@ import logging
 from bson import ObjectId
 from datetime import datetime
 from dao.db_config import Database
-from management.models import Meeting, MeetingParticipant, ChatMessage
-
+from management.models import Meeting, MeetingParticipant
 
 logger = logging.getLogger(__name__)
-
 
 class MeetingDAO:
     """Data Access Object for Meeting-related operations"""
@@ -15,7 +13,6 @@ class MeetingDAO:
         db = Database.get_instance().db
         self.meeting_collection = db.meetings
         self.participant_collection = db.meeting_participants
-        self.chat_collection = db.chat_messages
         logger.info("MeetingDAO initialized")
 
     async def create_meeting(self, meeting):
@@ -41,18 +38,12 @@ class MeetingDAO:
         return result.modified_count > 0
 
     async def add_participant(self, participant):
-        """
-        Add a participant to a meeting.
-        Prevent duplicate entries using (meeting_id, user_id) unique constraint.
-        """
+        """Add a participant to a meeting (prevent duplicates)"""
         participant_dict = participant.to_dict()
-
-        # Check if already exists
         existing = await self.participant_collection.find_one({
             "meeting_id": participant.meeting_id,
             "user_id": participant.user_id
         })
-
         if existing:
             logger.info("User has already joined this meeting.")
             return str(existing["_id"])
@@ -91,20 +82,3 @@ class MeetingDAO:
             participants.append(MeetingParticipant.from_dict(participant_data))
 
         return participants
-
-    async def add_chat_message(self, message):
-        """Add a chat message to a meeting"""
-        message_dict = message.to_dict()
-        result = await self.chat_collection.insert_one(message_dict)
-        return str(result.inserted_id)
-
-    async def get_chat_messages(self, meeting_id, limit=100):
-        """Get chat messages for a meeting"""
-        cursor = self.chat_collection.find({"meeting_id": meeting_id}).sort("sent_at", 1).limit(limit)
-        messages = []
-
-        async for message_data in cursor:
-            message_data["message_id"] = str(message_data.pop("_id"))
-            messages.append(ChatMessage.from_dict(message_data))
-
-        return messages
